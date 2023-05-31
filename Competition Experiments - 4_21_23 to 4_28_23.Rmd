@@ -1,0 +1,474 @@
+---
+title: "Competition Experiments - 4/21/23 to 4/28/23"
+author: "Marissa Douglas"
+date: "2023-05-22"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Load packages
+```{r}
+library(patchwork)
+library(dplyr)
+library(tidyverse)
+```
+
+Upload data of the colony moved to a used box
+```{r message=FALSE}
+old_box <-read.csv("Competition Experiments - 4_21_23 to 4_28_23  - Tidy Old Box.csv")
+head(old_box)
+```
+Graph the sticks
+```{r}
+sticks_old <- old_box %>% 
+  filter(location == "stick")
+```
+
+```{r}
+#get the average on each day with mutate
+sticks_old <- sticks_old %>% 
+  filter(!is.na(count))%>%
+  group_by(day) %>% 
+  mutate(meanInDay = mean(count))
+
+sticks_old_plot <- sticks_old %>%
+  filter(!is.na(count))%>%
+  ggplot(aes(x = day, y = meanInDay)) +
+  geom_line(aes(), alpha = .2) +
+  geom_point() +
+  ylim(0,14)+
+  xlab("Day of Observation") +
+  ylab("Mean Number of Ants on Sticks")
+sticks_old_plot 
+
+```
+Graph the used nests
+```{r}
+used_old <- old_box %>% 
+  filter(location == "usedNest")
+```
+
+```{r}
+#get the average on each day with mutate
+used_old <- used_old %>% 
+  filter(!is.na(count))%>%
+  group_by(day) %>% 
+  mutate(meanInDay = mean(count))
+
+
+used_old_plot <- used_old %>%
+  filter(!is.na(count))%>%
+  ggplot(aes(x = day, y = meanInDay)) +
+  geom_line(aes(), alpha = .2) +
+  geom_point() +
+  ylim(0,3)+
+  xlab("Day of Observation") +
+  ylab("Mean Ants on Used Nest")
+
+used_old_plot
+
+```
+Graph the fresh nests
+```{r}
+fresh_old <- old_box %>% 
+  filter(location == "freshNest")
+```
+
+```{r}
+#get the average on each day with mutate
+fresh_old <- fresh_old%>% 
+  filter(!is.na(count))%>%
+  group_by(day) %>% 
+  mutate(meanInDay = mean(count))
+
+
+fresh_old_plot<-fresh_old %>%
+  filter(!is.na(count))%>%
+  ggplot(aes(x = day, y = meanInDay)) +
+  geom_line(aes(), alpha = .2) +
+  geom_point() +
+  ylim(0,9)+
+  xlab("Day of Observation") +
+  ylab("Mean Ants on Fresh Nest")
+fresh_old_plot
+
+```
+```{r}
+used_old_plot+fresh_old_plot
+```
+Graph the water
+
+```{r}
+water_old <- old_box %>% 
+  filter(location == "water")
+```
+
+```{r}
+#get the average on each day with mutate
+water_old <- water_old %>% 
+  filter(!is.na(count))%>%
+  group_by(day) %>% 
+  mutate(meanInDay = mean(count))
+
+water_old_plot<-water_old %>%
+  filter(!is.na(count))%>%
+  ggplot(aes(x = day, y = meanInDay)) +
+  geom_line(aes(), alpha = .2) +
+  geom_point() +
+  ylim(0,6)+
+  xlab("Day of Observation") +
+  ylab("Mean Number of Ants on Water")
+
+water_old_plot
+
+```
+
+Graph the sugar water
+```{r}
+sugar_old <- old_box %>% 
+  filter(location == "sugarWater")
+```
+
+```{r}
+#get the average on each day with mutate
+sugar_old <- sugar_old %>% 
+  filter(!is.na(count))%>%
+  group_by(day) %>% 
+  mutate(meanInDay = mean(count))
+
+
+sugar_old_plot <- sugar_old %>%
+  filter(!is.na(count))%>%
+  ggplot(aes(x = day, y = meanInDay)) +
+  geom_line(aes(), alpha = .2) +
+  geom_point() +
+  ylim(0,6)+
+  xlab("Day of Observation") +
+  ylab("Mean Number of Ants on Sugar Water")
+
+sugar_old_plot
+
+```
+
+Graph the napkin slide
+```{r}
+napkin_old <- old_box %>% 
+  filter(location == "napkinSlide")
+```
+
+```{r}
+#get the average on each day with mutate
+napkin_old <- napkin_old %>% 
+  filter(!is.na(count))%>%
+  group_by(day) %>% 
+  mutate(meanInDay = mean(count))
+
+
+napkin_old_plot <- napkin_old %>%
+  filter(!is.na(count))%>%
+  ggplot(aes(x = day, y = meanInDay)) +
+  geom_line(aes(), alpha = .2) +
+  geom_point() +
+  ylim(0,3)+
+  xlab("Day of Observation") +
+  ylab("Mean Number of Ants on Napkin Slide")
+
+napkin_old_plot
+
+```
+
+Graph the pollen and cricket dish
+```{r}
+pollen_old <- old_box %>% 
+  filter(location == "pollenCricket")
+```
+
+```{r}
+#get the average on each day with mutate
+pollen_old <- pollen_old %>% 
+  filter(!is.na(count))%>%
+  group_by(day) %>% 
+  mutate(meanInDay = mean(count))
+
+
+pollen_old_plot <- pollen_old %>%
+  filter(!is.na(count))%>%
+  ggplot(aes(x = day, y = meanInDay)) +
+  geom_line(aes(), alpha = .2) +
+  geom_point() +
+  ylim(0,1)+
+  xlab("Day of Observation") +
+  ylab("Mean Number of Ants on Pollen and Cricket Dish")
+
+pollen_old_plot
+
+```
+
+
+Graph the other
+```{r}
+other_old <- old_box %>% 
+  filter(location == "other")
+```
+
+```{r}
+#get the average on each day with mutate
+other_old <- other_old %>% 
+  filter(!is.na(count))%>%
+  group_by(day) %>% 
+  mutate(meanInDay = mean(count))
+
+
+other_old_plot <- other_old %>%
+  filter(!is.na(count))%>%
+  ggplot(aes(x = day, y = meanInDay)) +
+  geom_line(aes(), alpha = .2) +
+  geom_point() +
+  ylim(0,13)+
+  xlab("Day of Observation") +
+  ylab("Mean Number of Ants on Other Areas")
+
+other_old_plot
+
+```
+
+
+```{r message=FALSE}
+fresh_box <-read.csv("Competition Experiments - 4_21_23 to 4_28_23  - Tidy New Box.csv")
+head(fresh_box)
+```
+
+
+
+Graph the sticks (new)
+```{r}
+sticks_new <- fresh_box %>% 
+  filter(location == "stick")
+```
+
+```{r}
+#get the average on each day with mutate
+sticks_new <- sticks_new %>% 
+  filter(!is.na(count))%>%
+  group_by(day) %>% 
+  mutate(meanInDay = mean(count))
+
+
+sticks_new_plot <- sticks_new %>%
+  filter(!is.na(count))%>%
+  ggplot(aes(x = day, y = meanInDay)) +
+  geom_line(aes(), alpha = .2) +
+  geom_point() +
+  ylim(0,14)+
+  xlab("Day of Observation") +
+  ylab("Mean Number of Ants on Sticks")
+sticks_new_plot
+
+```
+
+Graph the fresh nests (new)
+```{r}
+fresh_new <- fresh_box %>% 
+  filter(location == "freshNest")
+```
+
+```{r}
+#get the average on each day with mutate
+fresh_new <- fresh_new %>% 
+  filter(!is.na(count))%>%
+  group_by(day) %>% 
+  mutate(meanInDay = mean(count))
+
+
+fresh_new_plot <- fresh_new %>%
+  filter(!is.na(count))%>%
+  ggplot(aes(x = day, y = meanInDay)) +
+  geom_line(aes(), alpha = .2) +
+  geom_point() +
+  ylim(0,9)+
+  xlab("Day of Observation") +
+  ylab("Mean Number of Ants on Fresh Nest")
+fresh_new_plot
+
+```
+
+Graph the water (new)
+```{r}
+water_new <- fresh_box %>% 
+  filter(location == "water")
+```
+
+```{r}
+#get the average on each day with mutate
+water_new <- water_new %>% 
+  filter(!is.na(count))%>%
+  group_by(day) %>% 
+  mutate(meanInDay = mean(count))
+
+
+water_new_plot <- water_new %>%
+  filter(!is.na(count))%>%
+  ggplot(aes(x = day, y = meanInDay)) +
+  geom_line(aes(), alpha = .2) +
+  geom_point() +
+  ylim(0,6)+
+  xlab("Day of Observation") +
+  ylab("Mean Number of Ants on Water")
+water_new_plot
+```
+
+Graph the sugar water 
+```{r}
+sugar_new <- fresh_box %>% 
+  filter(location == "sugarWater")
+```
+
+```{r}
+
+#get the average on each day with mutate
+sugar_new <- sugar_new %>% 
+  filter(!is.na(count))%>%
+  group_by(day) %>% 
+  mutate(meanInDay = mean(count))
+
+
+sugar_new_plot <- sugar_new %>%
+  filter(!is.na(count))%>%
+  ggplot(aes(x = day, y = meanInDay)) +
+  geom_line(aes(), alpha = .2) +
+  geom_point() +
+  ylim(0,6)+
+  xlab("Day of Observation") +
+  ylab("Mean Number of Ants on Sugar Water")
+sugar_new_plot
+
+```
+
+Graph the napkin slide 
+```{r}
+napkin_new <- fresh_box %>% 
+  filter(location == "napkinSlide")
+```
+
+```{r}
+#get the average on each day with mutate
+napkin_new <- napkin_new %>% 
+  filter(!is.na(count))%>%
+  group_by(day) %>% 
+  mutate(meanInDay = mean(count))
+
+
+napkin_new_plot <- napkin_new %>%
+  filter(!is.na(count))%>%
+  ggplot(aes(x = day, y = meanInDay)) +
+  geom_line(aes(), alpha = .2) +
+  geom_point() +
+  ylim(0,3)+
+  xlab("Day of Observation") +
+  ylab("Mean Number of Ants on Napkin Slide")
+napkin_new_plot
+
+```
+
+
+Graph the pollen cricket
+```{r}
+pollen_new <- fresh_box %>% 
+  filter(location == "pollenCricket")
+```
+
+```{r}
+#get the average on each day with mutate
+pollen_new <- pollen_new %>% 
+  filter(!is.na(count))%>%
+  group_by(day) %>% 
+  mutate(meanInDay = mean(count))
+
+
+pollen_new_plot <- pollen_new %>%
+  filter(!is.na(count))%>%
+  ggplot(aes(x = day, y = meanInDay)) +
+  geom_line(aes(), alpha = .2) +
+  geom_point() +
+  ylim(0,1)+
+  xlab("Day of Observation") +
+  ylab("Mean Number of Ants on Pollen Cricket")
+pollen_new_plot
+
+```
+
+Graph the other
+```{r}
+other_new <- fresh_box %>% 
+  filter(location == "other")
+```
+
+```{r}
+#get the average on each day with mutate
+other_new <- other_new %>% 
+  filter(!is.na(count))%>%
+  group_by(day) %>% 
+  mutate(meanInDay = mean(count))
+
+
+other_new_plot <- other_new %>%
+  filter(!is.na(count))%>%
+  ggplot(aes(x = day, y = meanInDay)) +
+  geom_line(aes(), alpha = .2) +
+  geom_point() +
+  ylim(0,13)+
+  xlab("Day of Observation") +
+  ylab("Mean Number of Ants on Other")
+other_new_plot
+```
+
+
+Patchwork interesting comparisons:
+
+
+In the old/previously inhabited box, compare the number of ants on the used nest vs the fresh nest
+```{r}
+used_old_plot+fresh_old_plot
+```
+For each location, compare the counts in the new/fresh box vs the old/prev. inhabited box
+
+
+sticks in old v new
+```{r}
+sticks_old_plot+sticks_new_plot
+```
+fresh nests in new v old
+```{r}
+fresh_old_plot+fresh_new_plot
+```
+
+water in new v old
+```{r}
+water_old_plot+water_new_plot
+```
+
+
+sugar water in new v old
+```{r}
+sugar_old_plot+sugar_new_plot
+```
+
+napkin slide in new v old
+```{r}
+napkin_old_plot+napkin_new_plot
+```
+
+pollen and cricket dish in new v old
+```{r}
+pollen_old_plot+pollen_new_plot
+```
+
+
+other locations in new v old
+```{r}
+other_old_plot+other_new_plot
+```
+
