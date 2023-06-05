@@ -13,7 +13,9 @@ Load Packages Here:
 
 ```{r}
 library(tidyverse)
+library(infer)
 ```
+
 
 Load Raw Data Here:
 
@@ -48,6 +50,23 @@ mean_data <- proportion_data %>%
   mutate(meanInDay = mean(prop))
 
 mean_data
+```
+
+```{r}
+null_dist <- mean_data %>%
+  specify(meanInDay ~ colony) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 1000, type = "permute") %>%
+  calculate("diff in means", order = c("c392", "c393"))
+null_dist %>% 
+  visualize()
+```
+
+```{r}
+obs_mean <- mean_data %>%
+  specify(meanInDay ~ colony) %>%
+  calculate("diff in means", order = c("c392", "c393"))
+obs_mean
 ```
 
 
