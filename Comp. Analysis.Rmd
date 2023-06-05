@@ -33,5 +33,13 @@ sum_data
 ```
 
 
+A data table with the proportion for every observation (count/sum)
+```{r}
+proportion_data <- sum_data %>% 
+  mutate(prop = count/sum)
+proportion_data
+```
+
+
 
 
