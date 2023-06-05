@@ -30,3 +30,12 @@ plot(pressure)
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
 this is a test
+```{r}
+library(tidyverse)
+```
+
+
+```{r}
+read.csv("Competition Experiment Sp 2023 Data - Sheet1.csv")
+```
+
