@@ -16,6 +16,6 @@ library(tidyverse)
 
 
 ```{r}
-read.csv("Competition Experiment Sp 2023 Data - Sheet1.csv")
+raw_data <- read.csv("Competition Experiment Sp 2023 Data - Sheet1.csv")
 ```
 
