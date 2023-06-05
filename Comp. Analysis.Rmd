@@ -9,13 +9,29 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+Load Packages Here:
 
 ```{r}
 library(tidyverse)
 ```
 
+Load Raw Data Here:
 
 ```{r}
 raw_data <- read.csv("Competition Experiment Sp 2023 Data - Sheet1.csv")
 ```
+
+Mutate Data Here:
+
+A data table with the sums for every minute of every day per colony
+```{r}
+sum_data<- raw_data %>% 
+  filter(! is.na(count)) %>% 
+  group_by(colony, day, minute) %>%
+  mutate(sum = sum(count))
+sum_data
+```
+
+
+
 
