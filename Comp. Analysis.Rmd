@@ -23,7 +23,7 @@ raw_data <- read.csv("Competition Experiment Sp 2023 Data - Sheet1.csv")
 
 Mutate Data Here:
 
-A data table with the sums for every minute of every day per colony
+A data table with the sums for every minute of every day per colony (how many ants are active at that minute)
 ```{r}
 sum_data<- raw_data %>% 
   filter(! is.na(count)) %>% 
@@ -40,6 +40,15 @@ proportion_data <- sum_data %>%
 proportion_data
 ```
 
+Making a data frame that includes the mean proportion of ants at a location for each day
+
+```{r}
+mean_data <- proportion_data %>% 
+  group_by(colony, location, day) %>% 
+  mutate(meanInDay = mean(prop))
+
+mean_data
+```
 
 
 
